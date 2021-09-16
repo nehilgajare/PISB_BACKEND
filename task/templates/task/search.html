@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    {% if error %}
+    {{ error }}
+    {% endif %}
+    <h1><b>Search User</b></h1>
+    <form action="{% url 'search' %}" method="post">
+        {% csrf_token %}
+        <input type="text" name="search" placeholder="Enter Username or Email">
+        <input type="submit" value="Search"><br><br>
+
+    </form>
+
+    {% if match %}
+        {% for m in match %}
+            <ul>
+                <li>
+                    First Name : {{ m.first_name }}
+                </li>
+                <li>
+                    Last Name : {{ m.last_name }}
+                </li>
+                <li>
+                    Email : {{ user.email }}
+                </li>
+                <li>
+                    Phone Number : {{ m.phone_number }}
+                </li>
+            </ul>
+        {% endfor %}
+    {% endif %}
+
+</body>
+</html>
